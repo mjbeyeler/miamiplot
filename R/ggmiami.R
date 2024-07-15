@@ -404,6 +404,10 @@ ggmiami <- function(
                           size = 0.25)
   }
 
+  # Set in log2 scale
+  upper_plot <- upper_plot + ggplot2::scale_y_continuous(trans='log2')
+  lower_plot <- lower_plot + ggplot2::scale_y_continuous(trans='log2')
+
   # Put the two together
   gridExtra::grid.arrange(upper_plot, lower_plot, nrow = 2)
 
