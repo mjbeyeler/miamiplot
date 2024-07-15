@@ -174,7 +174,7 @@ ggmiami <- function(
                                                               TRUE)) +
     ggplot2::scale_y_continuous(limits = c(0, plot_data$maxp),
                                 expand =
-                                  ggplot2::expansion(mult = c(0.02, 0)), trans='log2') +
+                                  ggplot2::expansion(mult = c(0.02, 0))) +
     ggplot2::labs(x = "", y = upper_ylab) +
     ggplot2::theme_classic() +
     ggplot2::theme(legend.position = "none",
