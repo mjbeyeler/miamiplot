@@ -404,9 +404,19 @@ ggmiami <- function(
                           size = 0.25)
   }
 
-  # Set in log2 scale
-  upper_plot <- upper_plot + ggplot2::scale_y_continuous(trans='log2')
-  lower_plot <- lower_plot + ggplot2::scale_y_continuous(trans='log2')
+  # Log2 scale stuff
+
+  #find smallest exponent x for which 2^x > max(log10p)
+  find_smallest_exponent <- function(constant) {
+    return(ceiling(log2(constant)))
+  }
+
+  upper_lim = find_smallest_exponent(plot_data$maxp)
+  mybreaks = 2^seq(1, upper_lim)
+  mylimits = c(0.9, upper_lim+0.1)
+  
+  upper_plot <- upper_plot + ggplot2::scale_y_continuous(trans='log2', breaks = mybreaks, limits=mylimits)
+  lower_plot <- lower_plot + ggplot2::scale_y_reverse(trans='log2', breaks = rev(mybreaks), limits=rev(mylimits))
 
   # Put the two together
   gridExtra::grid.arrange(upper_plot, lower_plot, nrow = 2)
